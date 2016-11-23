@@ -85,7 +85,7 @@ class Board
     (97 + col).chr + (row + 1).to_s
   end
 
-  def move!(from_to_algebraic)
+  def move(from_to_algebraic)
     from_algebraic, to_algebraic = from_to_algebraic.split('-')
     from_row, from_col = algebraic_to_row_col(from_algebraic)
     to_row, to_col = algebraic_to_row_col(to_algebraic)

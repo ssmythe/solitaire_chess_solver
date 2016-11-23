@@ -19,7 +19,7 @@ class Solver
       captures.each do |capture|
         new_board=Board.new
         new_board.setup(board.to_fen)
-        new_board.move!(capture)
+        new_board.move(capture)
         new_path=path
         new_path+=' ' if path != ''
         new_path+=capture

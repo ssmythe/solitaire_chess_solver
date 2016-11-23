@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
-if RUBY_PLATFORM =~ /(win32|w32)/
-  gem "win32console", '1.3.0'
-end
+gem 'win32console', '1.3.0' if RUBY_PLATFORM =~ /(win32|w32)/
 
 gem 'logger'
 gem 'simplecov'
@@ -17,5 +15,6 @@ group :test do
   gem 'rake'
   gem 'rspec'
   gem 'rubocop'
-  gem 'metric_fu'
+  # gem 'metric_fu'
+  gem "rubycritic", :require => false
 end
