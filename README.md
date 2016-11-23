@@ -1,2 +1,3 @@
-# kata_using_cucumber
-A template project for using Cucumber for katas
+# Solitaire Chess Solver
+
+A simple program to produce solutions to the Solitaire Chess board game.
