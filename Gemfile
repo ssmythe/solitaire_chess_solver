@@ -16,5 +16,5 @@ group :test do
   gem 'rspec'
   gem 'rubocop'
   # gem 'metric_fu'
-  gem "rubycritic", :require => false
+  gem 'rubycritic'
 end

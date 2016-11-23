@@ -1,19 +1,23 @@
+require 'logger'
+
+# Board - board coordinate conversions, square lookups, piece movement,
+# and FEN load/unload
 class Board
   def initialize
     @board = [
-      ['_', '_', '_', '_'],
-      ['_', '_', '_', '_'],
-      ['_', '_', '_', '_'],
-      ['_', '_', '_', '_'],
+      %w(_ _ _ _),
+      %w(_ _ _ _),
+      %w(_ _ _ _),
+      %w(_ _ _ _)
     ]
   end
 
-  def setup(fen='0/0/0/0')
-    row_num=3
+  def setup(fen = '0/0/0/0')
+    row_num = 3
     fen.split('/').each do |row|
-      col_num=0
+      col_num = 0
       row.chars.each do |c|
-        if ['1', '2', '3', '4'].include?(c)
+        if %w(1 2 3 4).include?(c)
           col_num += c.to_i
         else
           @board[row_num][col_num] = c
@@ -27,26 +31,24 @@ class Board
   def to_fen
     rows = []
     3.downto(0).each do |row_num|
-      row=''
-      spaces=0
-      space_flag=0
+      row = ''
+      spaces = 0
+      space_flag = 0
       (0..3).each do |col_num|
         square = @board[row_num][col_num]
         if square == '_'
-          spaces+=1
-          space_flag=1
+          spaces += 1
+          space_flag = 1
         else
-          if space_flag == 1
-            row += spaces.to_s
-          end
-          space_flag=0
-          spaces=0
+          row += spaces.to_s if space_flag == 1
+          space_flag = 0
+          spaces = 0
           row += square
         end
       end
       if space_flag == 1
         row += spaces.to_s
-        space_flag=0
+        space_flag = 0
       end
       rows << row
     end
@@ -55,15 +57,15 @@ class Board
   end
 
   def to_s
-    output=''
+    output = ''
     3.downto(0).each do |row_num|
-      output += "#{row_num+1}|"
+      output += "#{row_num + 1}|"
       (0..3).each do |col_num|
         output += "#{@board[row_num][col_num]}|"
       end
       output += "\n"
     end
-    output += "  a b c d"
+    output += '  a b c d'
   end
 
   def square_row_col(row, col)
@@ -93,7 +95,7 @@ class Board
     @board[from_row][from_col] = '_'
   end
 
-  def is_valid_board_row_col?(row, col)
+  def valid_board_row_col?(row, col)
     log = Logger.new($stderr)
     log.level = Logger::INFO
 

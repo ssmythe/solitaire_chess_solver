@@ -17,7 +17,6 @@ Then(/^the board should look like$/) do |output|
   @board.to_s.should == output
 end
 
-
 Then(/^the resulting fen should be "([^"]*)"$/) do |output|
   @fen.should == output
 end

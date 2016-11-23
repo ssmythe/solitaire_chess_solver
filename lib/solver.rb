@@ -3,8 +3,9 @@ require_relative 'player'
 
 require 'logger'
 
+# Solver - find solution(s) for given board
 class Solver
-  def find_solution(board, path='')
+  def find_solution(board, path = '')
     log = Logger.new($stderr)
     log.level = Logger::INFO
 
@@ -17,13 +18,13 @@ class Solver
     else
       solutions = ''
       captures.each do |capture|
-        new_board=Board.new
+        new_board = Board.new
         new_board.setup(board.to_fen)
         new_board.move(capture)
-        new_path=path
-        new_path+=' ' if path != ''
-        new_path+=capture
-        solution=find_solution(new_board, "#{new_path}")
+        new_path = path
+        new_path += ' ' if path != ''
+        new_path += capture
+        solution = find_solution(new_board, new_path)
         if solutions == ''
           solutions = solution
         else
@@ -33,6 +34,6 @@ class Solver
     end
 
     log.debug("solutions=<#{solutions.inspect}>")
-    return solutions
+    solutions
   end
 end
